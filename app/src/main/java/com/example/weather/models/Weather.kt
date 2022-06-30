@@ -1,4 +1,6 @@
 package com.example.weather.models
 
-class Weather {
-}
+data class Weather(
+    val current: Current,
+    val location: Location
+)
