@@ -18,6 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.example.weather.API_KEY"
+            android:value="test" />
+
     </application>
 
 </manifest>
