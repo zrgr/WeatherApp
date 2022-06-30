@@ -4,5 +4,5 @@ import com.example.weather.network.RetrofitInstance
 
 class WeatherRepository {
 
-    suspend fun getApod() = RetrofitInstance.api.getApod()
+    suspend fun getWeather(location: String) = RetrofitInstance.api.getWeather(location=location)
 }

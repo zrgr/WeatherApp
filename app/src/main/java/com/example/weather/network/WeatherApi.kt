@@ -9,6 +9,8 @@ interface WeatherApi {
     @GET("current.json")
     suspend fun getWeather(
         @Query("key")
-        key: String = BuildConfig.API_KEY
+        key: String = BuildConfig.API_KEY,
+        @Query("key")
+        location: String
     ): Weather
 }
