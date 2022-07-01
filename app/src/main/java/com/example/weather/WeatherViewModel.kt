@@ -1,5 +1,6 @@
 package com.example.weather
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,6 +26,7 @@ class WeatherViewModel : ViewModel(){
             try {
                 _weather.value = _repo.getWeather(location)
             } catch (e: Exception) {
+                Log.e("getWeather", "api call not working");
             }
         }
     }

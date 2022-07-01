@@ -10,7 +10,9 @@ interface WeatherApi {
     suspend fun getWeather(
         @Query("key")
         key: String = BuildConfig.API_KEY,
-        @Query("key")
-        location: String
+        @Query("q")
+        location: String,
+        @Query("aqi")
+        airQuality: String = "no"
     ): Weather
 }
