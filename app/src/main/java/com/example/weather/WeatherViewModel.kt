@@ -8,7 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.weather.models.Weather
 import com.example.weather.repository.WeatherRepository
 import kotlinx.coroutines.launch
-import java.lang.Exception
+
+private const val TAG = "WeatherViewModel"
 
 class WeatherViewModel : ViewModel(){
 
@@ -26,7 +27,7 @@ class WeatherViewModel : ViewModel(){
             try {
                 _weather.value = _repo.getWeather(location)
             } catch (e: Exception) {
-                Log.e("getWeather", "api call not working");
+                Log.e(TAG, "getWeather() Api call failed");
             }
         }
     }
