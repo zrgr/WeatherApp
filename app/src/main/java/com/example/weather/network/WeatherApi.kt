@@ -1,18 +1,19 @@
 package com.example.weather.network
 
 import com.example.weather.BuildConfig
-import com.example.weather.models.Weather
+import com.example.weather.models.Forecast
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface WeatherApi {
-    @GET("current.json")
-    suspend fun getWeather(
-        @Query("key")
-        key: String = BuildConfig.API_KEY,
-        @Query("q")
+    @GET("{location}")
+    suspend fun getForecast(
+        @Path("location")
         location: String,
-        @Query("aqi")
-        airQuality: String = "no"
-    ): Weather
+        @Query("res")
+        res: String,
+        @Query("key")
+        key: String = BuildConfig.API_KEY
+    ): Forecast
 }

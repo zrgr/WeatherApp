@@ -1,12 +1,12 @@
 package com.example.weather.models
 
 data class Location(
+    val Period: List<Period>,
+    val continent: String,
     val country: String,
-    val lat: Double,
-    val localtime: String,
-    val localtime_epoch: Int,
-    val lon: Double,
-    val name: String,
-    val region: String,
-    val tz_id: String
+    val elevation: String,
+    val i: String,
+    val lat: String,
+    val lon: String,
+    val name: String
 )
