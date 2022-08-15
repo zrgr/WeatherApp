@@ -30,14 +30,14 @@ class WeatherViewModel : ViewModel(){
             try {
                 val forecast = _repo.getWeather(location, res)
                 _weather.value = _weather.value
-                SetValues(forecast)
+                setValues(forecast)
             } catch (e: Exception) {
                 Log.e(TAG, "getWeather() Api call failed");
             }
         }
     }
 
-    private fun SetValues(forecast: Forecast) {
+    private fun setValues(forecast: Forecast) {
         _currentChanceOfRain.value = forecast.SiteRep.DV.Location.Period[0].Rep[0].Pp
     }
 
