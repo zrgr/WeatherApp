@@ -9,18 +9,31 @@
             type="com.example.weather.WeatherViewModel" />
     </data>
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         tools:context=".fragments.JacketFragment">
 
-        <TextView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@{viewModel.currentChanceOfRain}"
-            android:textColor="@android:color/black"
-            android:textSize="18dp"
-            tools:text="Test Hello" />
+            android:layout_height="400dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            card_view:cardCornerRadius="20dp"
+            card_view:cardElevation="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.currentChanceOfRain}"
+                android:textColor="@android:color/black"
+                android:textSize="18dp"
+                tools:text="Test Hello" />
+
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
 </layout>
