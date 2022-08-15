@@ -16,6 +16,9 @@ class WeatherViewModel : ViewModel(){
     private val _weather = MutableLiveData<Forecast>()
     val weather: LiveData<Forecast> = _weather
 
+    private val _currentChanceOfRain = MutableLiveData<String>()
+    val currentChanceOfRain: LiveData<String> = _currentChanceOfRain
+
     private val _repo = WeatherRepository()
 
     init {
@@ -25,12 +28,17 @@ class WeatherViewModel : ViewModel(){
     fun getWeatherForecast(location: String, res: String) {
         viewModelScope.launch {
             try {
-                _weather.value = _repo.getWeather(location, res)
-                val test = "hello"
+                val forecast = _repo.getWeather(location, res)
+                _weather.value = _weather.value
+                SetValues(forecast)
             } catch (e: Exception) {
                 Log.e(TAG, "getWeather() Api call failed");
             }
         }
+    }
+
+    private fun SetValues(forecast: Forecast) {
+        _currentChanceOfRain.value = forecast.SiteRep.DV.Location.Period[0].Rep[0].Pp
     }
 
 }
