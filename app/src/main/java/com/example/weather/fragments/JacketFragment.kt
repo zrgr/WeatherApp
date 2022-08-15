@@ -22,6 +22,7 @@ class JacketFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
+        viewModel.getWeatherForecast("324159", "3hourly")
         binding.currentChanceRain.text = getString(R.string.current_chance_rain, viewModel.currentChanceOfRain.value.toString())
 
         return binding.root

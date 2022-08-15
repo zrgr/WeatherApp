@@ -22,7 +22,7 @@ class WeatherViewModel : ViewModel(){
     private val _repo = WeatherRepository()
 
     init {
-        getWeatherForecast("324159", "3hourly")
+        //getWeatherForecast("324159", "3hourly")
     }
 
     fun getWeatherForecast(location: String, res: String) {
