@@ -15,6 +15,11 @@
         android:background="#ADD8E6"
         tools:context=".fragments.JacketFragment">
 
+        <com.github.matteobattilana.weather.WeatherView
+            android:id="@+id/wv_weather_view"
+            android:layout_width="match_parent"
+            android:layout_height="600dp"/>
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="400dp"
