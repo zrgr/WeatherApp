@@ -2,6 +2,7 @@ package com.example.weather.fragments
 
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -28,8 +29,10 @@ class JacketFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        viewModel.getWeatherForecast("324159", "3hourly")
-        binding.currentChanceRain.text = getString(R.string.current_chance_rain, viewModel.currentChanceOfRain.value.toString())
+        viewModel.currentChanceOfRain.observe(viewLifecycleOwner) { data ->
+            binding.currentChanceRain.text = getString(R.string.current_chance_rain, data)
+
+        }
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
@@ -39,7 +42,6 @@ class JacketFragment : Fragment() {
     }
 
     private fun setWeather() {
-
         binding.wvWeatherView.apply {
             setWeatherData(PrecipType.RAIN)
             speed = 250
@@ -48,8 +50,6 @@ class JacketFragment : Fragment() {
             fadeOutPercent = 1f
             colour = Color.parseColor("#0214fa")
             scaleFactor = 2f
-
         }
     }
-
 }

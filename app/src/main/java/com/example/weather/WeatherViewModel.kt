@@ -11,6 +11,8 @@ import kotlinx.coroutines.launch
 
 private const val TAG = "WeatherViewModel"
 
+enum class WeatherApiStatus { LOADING, ERROR, DONE }
+
 class WeatherViewModel : ViewModel(){
 
     private val _weather = MutableLiveData<Forecast>()
@@ -19,19 +21,25 @@ class WeatherViewModel : ViewModel(){
     private val _currentChanceOfRain = MutableLiveData<String>()
     val currentChanceOfRain: LiveData<String> = _currentChanceOfRain
 
+    private val _status = MutableLiveData<WeatherApiStatus>()
+    val status: LiveData<WeatherApiStatus> = _status
+
     private val _repo = WeatherRepository()
 
     init {
-        //getWeatherForecast("324159", "3hourly")
+        getWeatherForecast("324159", "3hourly")
     }
 
     fun getWeatherForecast(location: String, res: String) {
         viewModelScope.launch {
+            _status.value = WeatherApiStatus.LOADING
             try {
                 val forecast = _repo.getWeather(location, res)
                 _weather.value = _weather.value
                 setValues(forecast)
+                _status.value = WeatherApiStatus.DONE
             } catch (e: Exception) {
+                _status.value = WeatherApiStatus.ERROR
                 Log.e(TAG, "getWeather() Api call failed");
             }
         }
