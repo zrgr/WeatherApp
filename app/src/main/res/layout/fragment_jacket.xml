@@ -12,7 +12,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ADD8E6"
+        android:background="#e9eaf7"
         tools:context=".fragments.JacketFragment">
 
         <com.github.matteobattilana.weather.WeatherView

@@ -62,5 +62,5 @@ dependencies {
     implementation "io.coil-kt:coil:2.0.0-rc03"
 
     //WeatherView
-    implementation 'com.github.MatteoBattilana:WeatherView:3.0.0'
+    implementation 'com.github.zrgr:WeatherView:1fce090f72'
 }

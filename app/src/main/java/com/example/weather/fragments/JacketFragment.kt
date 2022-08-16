@@ -1,5 +1,6 @@
 package com.example.weather.fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import com.example.weather.R
 import com.example.weather.WeatherViewModel
 import com.example.weather.databinding.FragmentJacketBinding
 import com.github.matteobattilana.weather.PrecipType
+
 
 class JacketFragment : Fragment() {
 
@@ -37,16 +39,15 @@ class JacketFragment : Fragment() {
     }
 
     private fun setWeather() {
-        weather = PrecipType.RAIN
-        var weatherParticles = 60f
-        var weatherSpeed = 200
 
         binding.wvWeatherView.apply {
-            setWeatherData(weather)
-            speed = weatherSpeed
-            emissionRate = weatherParticles
+            setWeatherData(PrecipType.RAIN)
+            speed = 250
+            emissionRate = 100f
             angle = 0
             fadeOutPercent = 1f
+            colour = Color.parseColor("#0214fa")
+            scaleFactor = 2f
 
         }
     }
