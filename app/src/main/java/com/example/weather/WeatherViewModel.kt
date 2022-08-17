@@ -35,12 +35,12 @@ class WeatherViewModel : ViewModel(){
             _status.value = WeatherApiStatus.LOADING
             try {
                 val forecast = _repo.getWeather(location, res)
-                _weather.value = _weather.value
+                _weather.value = forecast
                 setValues(forecast)
                 _status.value = WeatherApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = WeatherApiStatus.ERROR
-                Log.e(TAG, "getWeather() Api call failed");
+                Log.e(TAG, "getWeatherForecast() Api call failed");
             }
         }
     }

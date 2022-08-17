@@ -29,9 +29,9 @@ class JacketFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        viewModel.currentChanceOfRain.observe(viewLifecycleOwner) { data ->
-            binding.currentChanceRain.text = getString(R.string.current_chance_rain, data)
-
+        viewModel.weather.observe(viewLifecycleOwner) { data ->
+            val chanceOfRain = data.SiteRep.DV.Location.Period[0].Rep[0].Pp
+            binding.currentChanceRain.text = getString(R.string.current_chance_rain, chanceOfRain)
         }
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)

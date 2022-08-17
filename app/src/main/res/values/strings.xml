@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">weather</string>
-    <string name="current_chance_rain">%1$s  Chance of Rain</string>
+    <string name="current_chance_rain">%1$s%%  Chance of Rain</string>
 </resources>
