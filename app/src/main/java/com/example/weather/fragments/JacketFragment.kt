@@ -31,13 +31,14 @@ class JacketFragment : Fragment() {
 
         viewModel.weather.observe(viewLifecycleOwner) { data ->
             val chanceOfRain = data.SiteRep.DV.Location.Period[0].Rep[0].Pp
+            val currentWindSpeed = data.SiteRep.DV.Location.Period[0].Rep[0].S
             if (chanceOfRain.toInt() > 50) {
                 binding.jacket.text = "Yes"
             } else {
                 binding.jacket.text = "No"
             }
             binding.currentChanceRain.text = getString(R.string.current_chance_rain, chanceOfRain)
-            setWeather(chanceOfRain.toFloat())
+            setWeather(chanceOfRain.toFloat(), currentWindSpeed.toInt())
         }
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -47,15 +48,15 @@ class JacketFragment : Fragment() {
         return binding.root
     }
 
-    private fun setWeather(chanceOfRain: Float) {
+    private fun setWeather(chanceOfRain: Float, windSpeed: Int) {
         binding.wvWeatherView.apply {
             setWeatherData(PrecipType.RAIN)
             speed = 250
             emissionRate = chanceOfRain
-            angle = 0
+            angle = windSpeed
             fadeOutPercent = 1f
             colour = Color.parseColor("#0214fa")
-            scaleFactor = 2f
+            scaleFactor = 3f
         }
     }
 }
