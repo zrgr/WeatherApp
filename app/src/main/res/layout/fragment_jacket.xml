@@ -26,8 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="64dp"
-            android:text="Yes"
+            android:layout_marginTop="72dp"
             android:textColor="@android:color/black"
             android:textSize="72dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,33 +34,34 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Yes" />
 
+        <TextView
+            android:id="@+id/current_chance_rain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="@android:color/black"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/jacket"
+            tools:text="50% chance of rain" />
+
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:layout_gravity="center"
-            android:layout_marginTop="100dp"
             android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="32dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/jacket"
+            tools:layout_editor_absoluteX="10dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/current_chance_rain"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="18dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="50% chance of rain" />
-
 
                 <ImageView
                     android:id="@+id/status_image"
