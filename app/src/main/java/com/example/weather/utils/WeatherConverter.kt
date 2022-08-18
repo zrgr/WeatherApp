@@ -10,7 +10,7 @@ class WeatherConverter {
 
     fun convertForecast(forecast: Forecast): WeatherForecast {
         return WeatherForecast(
-            locationName = forecast.SiteRep.DV.Location.name,
+            locationName = formatLocation(forecast.SiteRep.DV.Location.name),
             dataDate = forecast.SiteRep.DV.dataDate,
             currentWeather = getThreeHourlyForecast(forecast.SiteRep.DV.Location.Period[0].Rep[0]),
             futureWeather = emptyList()
@@ -19,6 +19,10 @@ class WeatherConverter {
 
     fun jacketNeeded(chanceOfRain: Int): String {
         return if (chanceOfRain > 30) "Yes" else "No"
+    }
+
+    fun formatLocation(location: String): String {
+        return location.lowercase().replaceFirstChar { it.uppercase() }
     }
 
     fun <T> getFutureForcast(period: ArrayList<T>): List<Weather> {
