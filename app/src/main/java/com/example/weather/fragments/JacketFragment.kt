@@ -31,10 +31,11 @@ class JacketFragment : Fragment() {
 
         viewModel.weather.observe(viewLifecycleOwner) { data ->
             val chanceOfRain = data.currentWeather.chanceOfRain
-            val currentWindSpeed = data.currentWeather.windSpeed
+            val currentWindSpeed = data.currentWeather.windSpeed.toInt()
+            val location = data.locationName
             binding.jacket.text = data.currentWeather.jacketNeeded
-            binding.currentChanceRain.text = getString(R.string.current_chance_rain, chanceOfRain)
-            setWeather(chanceOfRain.toFloat(), currentWindSpeed.toInt())
+            binding.currentChanceRain.text = getString(R.string.current_chance_rain, chanceOfRain, location)
+            setWeather(chanceOfRain.toFloat(), currentWindSpeed)
         }
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
