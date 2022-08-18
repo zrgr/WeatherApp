@@ -1,4 +1,4 @@
-package com.example.weather.models
+package com.example.weather.models.api
 
 data class Location(
     val Period: List<Period>,
