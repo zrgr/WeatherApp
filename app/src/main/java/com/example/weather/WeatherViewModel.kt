@@ -6,7 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weather.models.api.Forecast
+import com.example.weather.models.app.WeatherForecast
 import com.example.weather.repository.WeatherRepository
+import com.example.weather.utils.WeatherConverter
 import kotlinx.coroutines.launch
 
 private const val TAG = "WeatherViewModel"
@@ -15,8 +17,8 @@ enum class WeatherApiStatus { LOADING, ERROR, DONE }
 
 class WeatherViewModel : ViewModel(){
 
-    private val _weather = MutableLiveData<Forecast>()
-    val weather: LiveData<Forecast> = _weather
+    private val _weather = MutableLiveData<WeatherForecast>()
+    val weather: LiveData<WeatherForecast> = _weather
 
     private val _currentChanceOfRain = MutableLiveData<String>()
     val currentChanceOfRain: LiveData<String> = _currentChanceOfRain
@@ -25,6 +27,7 @@ class WeatherViewModel : ViewModel(){
     val status: LiveData<WeatherApiStatus> = _status
 
     private val _repo = WeatherRepository()
+    private val _converter = WeatherConverter()
 
     init {
         getWeatherForecast("324159", "3hourly")
@@ -35,7 +38,7 @@ class WeatherViewModel : ViewModel(){
             _status.value = WeatherApiStatus.LOADING
             try {
                 val forecast = _repo.getWeather(location, res)
-                _weather.value = forecast
+                _weather.value = _converter.convertForecast(forecast)
                 setValues(forecast)
                 _status.value = WeatherApiStatus.DONE
             } catch (e: Exception) {
