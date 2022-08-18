@@ -32,11 +32,7 @@ class JacketFragment : Fragment() {
         viewModel.weather.observe(viewLifecycleOwner) { data ->
             val chanceOfRain = data.currentWeather.chanceOfRain
             val currentWindSpeed = data.currentWeather.windSpeed
-            if (chanceOfRain.toInt() > 50) {
-                binding.jacket.text = "Yes"
-            } else {
-                binding.jacket.text = "No"
-            }
+            binding.jacket.text = data.currentWeather.jacketNeeded
             binding.currentChanceRain.text = getString(R.string.current_chance_rain, chanceOfRain)
             setWeather(chanceOfRain.toFloat(), currentWindSpeed.toInt())
         }

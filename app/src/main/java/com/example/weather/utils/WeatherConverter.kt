@@ -18,7 +18,7 @@ class WeatherConverter {
     }
 
     fun jacketNeeded(chanceOfRain: Int): String {
-        return ""
+        return if (chanceOfRain > 30) "Yes" else "No"
     }
 
     fun <T> getFutureForcast(period: ArrayList<T>): List<Weather> {
