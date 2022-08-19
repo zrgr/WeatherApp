@@ -13,23 +13,41 @@ class WeatherConverter {
             locationName = formatLocation(forecast.SiteRep.DV.Location.name),
             dataDate = forecast.SiteRep.DV.dataDate,
             currentWeather = getThreeHourlyForecast(forecast.SiteRep.DV.Location.Period[0].Rep[0]),
-            futureWeather = emptyList()
+            futureWeather = getFutureForecast(forecast.SiteRep.DV.Location.Period)
         )
     }
 
-    fun jacketNeeded(chanceOfRain: Int): String {
+    private fun jacketNeeded(chanceOfRain: Int): String {
         return if (chanceOfRain > 30) "Yes" else "No"
     }
 
-    fun formatLocation(location: String): String {
+    private fun formatLocation(location: String): String {
         return location.lowercase().replaceFirstChar { it.uppercase() }
     }
 
-    fun <T> getFutureForcast(period: ArrayList<T>): List<Weather> {
-        return listOf()
+    private fun getFutureForecast(period: List<Period>): List<Weather> {
+        val periodToGet = 5
+        val currentDayForecast = period[0].Rep.size
+        var nextDayForecast = 0
+        var futureWeather = mutableListOf<Weather>()
+
+        if(currentDayForecast < 5) {
+            nextDayForecast = periodToGet - currentDayForecast
+        }
+
+        //Skip first forecast as it's already known
+        for (i in 1 until currentDayForecast) {
+            futureWeather.add(getThreeHourlyForecast(period[0].Rep[i]))
+        }
+
+        for (i in 0..nextDayForecast) {
+            futureWeather.add(getThreeHourlyForecast(period[1].Rep[i]))
+        }
+
+        return futureWeather
     }
 
-    fun getThreeHourlyForecast(forecast: Rep): Weather {
+    private fun getThreeHourlyForecast(forecast: Rep): Weather {
         return Weather(
             chanceOfRain = forecast.Pp,
             jacketNeeded = jacketNeeded(forecast.Pp.toInt()),
