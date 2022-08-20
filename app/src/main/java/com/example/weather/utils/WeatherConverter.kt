@@ -1,5 +1,6 @@
 package com.example.weather.utils
 
+import android.content.Context
 import android.content.res.Resources
 import android.provider.Settings.System.getString
 import com.example.weather.R
@@ -20,8 +21,8 @@ class WeatherConverter {
         )
     }
 
-    private fun jacketNeeded(chanceOfRain: Int): String {
-        return if (chanceOfRain > 30) "Yes" else "No"
+    private fun jacketNeeded(chanceOfRain: Int): Boolean {
+        return chanceOfRain > 30
     }
 
     private fun formatLocation(location: String): String {
