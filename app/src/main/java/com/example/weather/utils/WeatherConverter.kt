@@ -1,5 +1,8 @@
 package com.example.weather.utils
 
+import android.content.res.Resources
+import android.provider.Settings.System.getString
+import com.example.weather.R
 import com.example.weather.models.api.Forecast
 import com.example.weather.models.api.Period
 import com.example.weather.models.api.Rep
@@ -27,7 +30,7 @@ class WeatherConverter {
 
     private fun getFutureForecast(period: List<Period>): List<Weather> {
         val periodToGet = 5
-        val currentDayForecast = period[0].Rep.size
+        val currentDayForecast = period[0].Rep.size - 1
         var nextDayForecast = 0
         var futureWeather = mutableListOf<Weather>()
 
@@ -36,12 +39,14 @@ class WeatherConverter {
         }
 
         //Skip first forecast as it's already known
-        for (i in 1 until currentDayForecast) {
+        for (i in 1..currentDayForecast) {
             futureWeather.add(getThreeHourlyForecast(period[0].Rep[i]))
         }
 
-        for (i in 0..nextDayForecast) {
-            futureWeather.add(getThreeHourlyForecast(period[1].Rep[i]))
+        if (nextDayForecast != 0) {
+            for (i in 0 until nextDayForecast) {
+                futureWeather.add(getThreeHourlyForecast(period[1].Rep[i]))
+            }
         }
 
         return futureWeather
