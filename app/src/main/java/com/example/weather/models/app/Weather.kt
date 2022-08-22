@@ -6,5 +6,6 @@ data class Weather(
     val windSpeed: String,
     val temperature: String,
     val weatherType: String,
-    val temperatureFeelsLike: String
+    val temperatureFeelsLike: String,
+    val time: String
 )
