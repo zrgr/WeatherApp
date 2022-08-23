@@ -19,16 +19,15 @@ class WeatherConverter {
     fun convertForecast(forecast: Forecast): WeatherForecast {
 
         //Get position of most recent forecast
-        var timeOfFirstForecast = getTimeOfFirstForeCast(forecast.SiteRep.DV.Location.Period[0].Rep)
-        var positionToStart = 0
+//        var timeOfFirstForecast = getTimeOfFirstForeCast(forecast.SiteRep.DV.Location.Period[0].Rep)
+//        var positionToStart = 0
+//
+//        while (timeOfFirstForecast < getCurrentHour() && (timeOfFirstForecast + 3) <= 21) {
+//            positionToStart++
+//            timeOfFirstForecast += 3
+//        }
 
-//        if (timeOfFirstForecast < getCurrentHour())
-//            positionToStart = 1
-
-        while (timeOfFirstForecast < getCurrentHour()) {
-            positionToStart++
-            timeOfFirstForecast += 3
-        }
+        val positionToStart = getForecastTimeStepStartPosition(forecast.SiteRep.DV.Location.Period[0].Rep)
 
         return WeatherForecast(
             locationName = formatLocationName(forecast.SiteRep.DV.Location.name),
@@ -114,7 +113,15 @@ class WeatherConverter {
 
     private fun getCurrentHour() = LocalDateTime.now().hour
 
-    private fun getForecastTimeStepStartPosition(): Int {
-        return 0
+    private fun getForecastTimeStepStartPosition(forecasts: List<Rep>): Int {
+        var timeOfFirstForecast = getTimeOfFirstForeCast(forecasts)
+        var positionToStart = 0
+
+        while (timeOfFirstForecast < getCurrentHour() && (timeOfFirstForecast + 3) <= 21) {
+            positionToStart++
+            timeOfFirstForecast += 3
+        }
+
+        return positionToStart
     }
 }
