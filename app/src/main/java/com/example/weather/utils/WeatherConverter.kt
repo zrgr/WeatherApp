@@ -1,6 +1,5 @@
 package com.example.weather.utils
 
-import android.content.Context
 import android.content.res.Resources
 import android.provider.Settings.System.getString
 import com.example.weather.R
@@ -18,11 +17,24 @@ import java.util.*
 class WeatherConverter {
 
     fun convertForecast(forecast: Forecast): WeatherForecast {
+
+        //Get position of most recent forecast
+        var timeOfFirstForecast = getTimeOfFirstForeCast(forecast.SiteRep.DV.Location.Period[0].Rep)
+        var positionToStart = 0
+
+//        if (timeOfFirstForecast < getCurrentHour())
+//            positionToStart = 1
+
+        while (timeOfFirstForecast < getCurrentHour()) {
+            positionToStart++
+            timeOfFirstForecast += 3
+        }
+
         return WeatherForecast(
-            locationName = formatLocation(forecast.SiteRep.DV.Location.name),
+            locationName = formatLocationName(forecast.SiteRep.DV.Location.name),
             dataDate = forecast.SiteRep.DV.dataDate,
-            currentWeather = getThreeHourlyForecast(forecast.SiteRep.DV.Location.Period[0].Rep[0], getForecastTime(forecast.SiteRep.DV.Location.Period[0].Rep.size, 0)),
-            futureWeather = getFutureForecast(forecast.SiteRep.DV.Location.Period)
+            currentWeather = getThreeHourlyForecast(forecast.SiteRep.DV.Location.Period[0].Rep[positionToStart], getForecastTime(forecast.SiteRep.DV.Location.Period[0].Rep.size, positionToStart)),
+            futureWeather = getFutureForecast(forecast.SiteRep.DV.Location.Period, positionToStart)
         )
     }
 
@@ -30,23 +42,24 @@ class WeatherConverter {
         return chanceOfRain > 30
     }
 
-    private fun formatLocation(location: String): String {
+    private fun formatLocationName(location: String): String {
         return location.lowercase().replaceFirstChar { it.uppercase() }
     }
 
-    private fun getFutureForecast(period: List<Period>): List<Weather> {
+    private fun getFutureForecast(period: List<Period>, positionToStart: Int): List<Weather> {
         val periodToGet = 5
         val currentDayForecast = period[0].Rep.size - 1
-        var nextDayForecast = 0
+        var nextDayForecast = positionToStart
         var futureWeather = mutableListOf<Weather>()
 
-        if(currentDayForecast < 5) {
-            nextDayForecast = periodToGet - currentDayForecast
+        //Skip first forecast as it's already known
+        for (i in positionToStart..currentDayForecast) {
+            futureWeather.add(getThreeHourlyForecast(period[0].Rep[i], getForecastTime(i, i)))
         }
 
-        //Skip first forecast as it's already known
-        for (i in 1..currentDayForecast) {
-            futureWeather.add(getThreeHourlyForecast(period[0].Rep[i], getForecastTime(currentDayForecast, i)))
+        //Need to get forecasts from next day if current day doesn't have enough
+        if(currentDayForecast < periodToGet) {
+            nextDayForecast = periodToGet - futureWeather.size
         }
 
         if (nextDayForecast != 0) {
@@ -72,20 +85,36 @@ class WeatherConverter {
 
     private fun getForecastTime(noOfForecast: Int, pos: Int): String {
         val times = listOf( 0, 3, 6, 9, 12, 15, 18, 21)
-        var addPos: Int
 
-        addPos = if (noOfForecast < times.size) {
+        var timeToGet: Int = if (noOfForecast < times.size) {
             times.size - noOfForecast
         } else {
             pos
         }
 
         val currentHour = LocalDateTime.now().hour
-        if (times[addPos] < currentHour && noOfForecast < 8)
-            addPos += 1
+        if (times[timeToGet] < currentHour && noOfForecast < 8)
+            timeToGet += 1
 
-        val timeCheck = LocalTime.of(times[addPos],0).toString()
+        return LocalTime.of(times[timeToGet],0).toString()
+    }
 
-        return LocalTime.of(times[addPos],0).toString()
+    private fun getTimeOfFirstForeCast(currentDayForecast: List<Rep>): Int{
+        val times = listOf( 0, 3, 6, 9, 12, 15, 18, 21)
+        val noOfForecast = currentDayForecast.size
+
+        var timeToGet: Int = if (currentDayForecast.size < times.size) {
+            times.size - noOfForecast
+        } else {
+            0
+        }
+
+        return times[timeToGet];
+    }
+
+    private fun getCurrentHour() = LocalDateTime.now().hour
+
+    private fun getForecastTimeStepStartPosition(): Int {
+        return 0
     }
 }
