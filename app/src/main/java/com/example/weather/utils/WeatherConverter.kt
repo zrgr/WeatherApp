@@ -19,14 +19,6 @@ class WeatherConverter {
     fun convertForecast(forecast: Forecast): WeatherForecast {
 
         //Get position of most recent forecast
-//        var timeOfFirstForecast = getTimeOfFirstForeCast(forecast.SiteRep.DV.Location.Period[0].Rep)
-//        var positionToStart = 0
-//
-//        while (timeOfFirstForecast < getCurrentHour() && (timeOfFirstForecast + 3) <= 21) {
-//            positionToStart++
-//            timeOfFirstForecast += 3
-//        }
-
         val positionToStart = getForecastTimeStepStartPosition(forecast.SiteRep.DV.Location.Period[0].Rep)
 
         return WeatherForecast(
