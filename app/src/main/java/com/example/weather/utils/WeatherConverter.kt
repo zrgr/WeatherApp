@@ -44,8 +44,10 @@ class WeatherConverter {
         var futureWeather = mutableListOf<Weather>()
 
         //Skip first forecast as it's already known
-        for (i in positionToStart..currentDayForecast) {
-            futureWeather.add(getThreeHourlyForecast(period[0].Rep[i], getForecastTime(i, i)))
+        if(positionToStart != currentDayForecast) {
+            for (i in positionToStart..currentDayForecast) {
+                futureWeather.add(getThreeHourlyForecast(period[0].Rep[i], getForecastTime(i, i)))
+            }
         }
 
         //Need to get forecasts from next day if current day doesn't have enough
