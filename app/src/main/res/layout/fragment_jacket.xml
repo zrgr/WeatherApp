@@ -48,15 +48,15 @@
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="200dp"
             android:layout_gravity="center"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="32dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/jacket"
+            app:layout_constraintTop_toBottomOf="@+id/current_chance_rain"
             tools:layout_editor_absoluteX="10dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -75,5 +75,37 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/jacket_later"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="Do you need a jacket later?"
+            android:textColor="@android:color/black"
+            android:textSize="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView"
+            tools:text="Do you need a jacket later?" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/future_weather"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:clipToPadding="false"
+            android:padding="6dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/jacket_later"
+            app:listData="@{viewModel.weather.futureWeather}"
+            app:spanCount="2"
+            tools:itemCount="16"
+            tools:listitem="@layout/future_weather" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
