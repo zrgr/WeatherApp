@@ -5,5 +5,5 @@ data class WeatherForecast(
     val dataDate: String,
     val currentWeather: Weather,
     val futureWeather: List<Weather>,
-    val weatherToDisplay: Weather
+    var weatherToDisplay: Weather
 )

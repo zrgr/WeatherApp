@@ -8,15 +8,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.databinding.FutureWeatherBinding
 import com.example.weather.models.app.Weather
 
-class FutureWeatherGridAdapter : ListAdapter<Weather,
-        FutureWeatherGridAdapter.FutureWeatherViewHolder>(DiffCallback) {
+class FutureWeatherGridAdapter (
+    val clickListener: FutureWeatherListener
+) : ListAdapter<Weather,
+FutureWeatherGridAdapter.FutureWeatherViewHolder>(DiffCallback) {
 
     class FutureWeatherViewHolder(
         private var binding: FutureWeatherBinding
     ): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(weather: Weather) {
+        fun bind(weather: Weather, clickListener: FutureWeatherListener) {
             binding.weather = weather
+            binding.clickListener = clickListener
             binding.executePendingBindings()
         }
     }
@@ -41,6 +44,10 @@ class FutureWeatherGridAdapter : ListAdapter<Weather,
 
     override fun onBindViewHolder(holder: FutureWeatherGridAdapter.FutureWeatherViewHolder, position: Int) {
         val weather = getItem(position)
-        holder.bind(weather)
+        holder.bind(weather, clickListener)
     }
+}
+
+class FutureWeatherListener(val clickListener: (weather: Weather) -> Unit) {
+    fun onClick(weather: Weather) = clickListener(weather)
 }

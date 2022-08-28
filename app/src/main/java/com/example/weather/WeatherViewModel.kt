@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weather.models.api.Forecast
+import com.example.weather.models.app.Weather
 import com.example.weather.models.app.WeatherForecast
 import com.example.weather.repository.WeatherRepository
 import com.example.weather.utils.WeatherConverter
@@ -52,4 +53,8 @@ class WeatherViewModel : ViewModel(){
         _currentChanceOfRain.value = forecast.SiteRep.DV.Location.Period[0].Rep[0].Pp
     }
 
+    fun updateWeatherDisplay(weather: Weather) {
+        _weather.value?.weatherToDisplay = weather
+        _weather.value = _weather.value
+    }
 }
