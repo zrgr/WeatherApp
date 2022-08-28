@@ -21,11 +21,14 @@ class WeatherConverter {
         //Get position of most recent forecast
         val positionToStart = getForecastTimeStepStartPosition(forecast.SiteRep.DV.Location.Period[0].Rep)
 
+        val initialWeather = getThreeHourlyForecast(forecast.SiteRep.DV.Location.Period[0].Rep[positionToStart], getForecastTime(forecast.SiteRep.DV.Location.Period[0].Rep.size, positionToStart))
+
         return WeatherForecast(
             locationName = formatLocationName(forecast.SiteRep.DV.Location.name),
             dataDate = forecast.SiteRep.DV.dataDate,
-            currentWeather = getThreeHourlyForecast(forecast.SiteRep.DV.Location.Period[0].Rep[positionToStart], getForecastTime(forecast.SiteRep.DV.Location.Period[0].Rep.size, positionToStart)),
-            futureWeather = getFutureForecast(forecast.SiteRep.DV.Location.Period, positionToStart)
+            currentWeather = initialWeather,
+            futureWeather = getFutureForecast(forecast.SiteRep.DV.Location.Period, positionToStart),
+            weatherToDisplay = initialWeather
         )
     }
 

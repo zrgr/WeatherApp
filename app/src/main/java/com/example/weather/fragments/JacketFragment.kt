@@ -31,10 +31,10 @@ class JacketFragment : Fragment() {
         binding.viewModel = viewModel
 
         viewModel.weather.observe(viewLifecycleOwner) { data ->
-            val chanceOfRain = data.currentWeather.chanceOfRain
-            val currentWindSpeed = data.currentWeather.windSpeed.toInt()
+            val chanceOfRain = data.weatherToDisplay.chanceOfRain
+            val currentWindSpeed = data.weatherToDisplay.windSpeed.toInt()
             val location = data.locationName
-            binding.jacket.text = data.currentWeather.jacketNeeded
+            binding.jacket.text = data.weatherToDisplay.jacketNeeded
             binding.currentChanceRain.text = getString(R.string.current_chance_rain, chanceOfRain, location)
             setWeather(chanceOfRain.toFloat(), currentWindSpeed)
         }
