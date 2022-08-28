@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.activityViewModels
+import com.example.weather.FutureWeatherGridAdapter
 import com.example.weather.R
 import com.example.weather.WeatherViewModel
 import com.example.weather.databinding.FragmentJacketBinding
@@ -44,7 +45,7 @@ class JacketFragment : Fragment() {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
-
+        binding.futureWeather.adapter = FutureWeatherGridAdapter()
 
         return binding.root
     }

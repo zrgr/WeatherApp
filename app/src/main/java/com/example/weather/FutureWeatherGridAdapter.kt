@@ -17,12 +17,13 @@ class FutureWeatherGridAdapter : ListAdapter<Weather,
     ): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(weather: Weather) {
-            binding.jacketNeeded = weather.jacketNeeded.toString()
+            //binding.jacketNeeded.text = weather.jacketNeeded.toString()
+            binding.weather = weather
             binding.executePendingBindings()
         }
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<WeatherForecast>() {
+    companion object DiffCallback : DiffUtil.ItemCallback<Weather>() {
         override fun areItemsTheSame(oldItem: Weather, newItem: Weather): Boolean {
             return oldItem.time == newItem.time
         }
@@ -37,11 +38,11 @@ class FutureWeatherGridAdapter : ListAdapter<Weather,
         viewType: Int
     ): FutureWeatherGridAdapter.FutureWeatherViewHolder {
         return FutureWeatherViewHolder(FutureWeatherBinding.inflate(
-            LayoutInflater.from(parent.context)))
+            LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: FutureWeatherGridAdapter.FutureWeatherViewHolder, position: Int) {
-        val marsPhoto = getItem(position)
-        holder.bind(marsPhoto)
+        val weather = getItem(position)
+        holder.bind(weather)
     }
 }
