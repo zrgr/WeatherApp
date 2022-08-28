@@ -34,11 +34,7 @@ class JacketFragment : Fragment() {
             val chanceOfRain = data.currentWeather.chanceOfRain
             val currentWindSpeed = data.currentWeather.windSpeed.toInt()
             val location = data.locationName
-            binding.jacket.text = if (data.currentWeather.jacketNeeded)
-                getString(R.string.jacket_needed_yes)
-            else
-                getString(R.string.jacket_needed_no)
-
+            binding.jacket.text = data.currentWeather.jacketNeeded
             binding.currentChanceRain.text = getString(R.string.current_chance_rain, chanceOfRain, location)
             setWeather(chanceOfRain.toFloat(), currentWindSpeed)
         }

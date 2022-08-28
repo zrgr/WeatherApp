@@ -29,8 +29,8 @@ class WeatherConverter {
         )
     }
 
-    private fun jacketNeeded(chanceOfRain: Int): Boolean {
-        return chanceOfRain > 30
+    private fun jacketNeeded(chanceOfRain: Int): String {
+        return if (chanceOfRain > 30) "Yes" else "No"
     }
 
     private fun formatLocationName(location: String): String {
@@ -39,6 +39,7 @@ class WeatherConverter {
 
     private fun getFutureForecast(period: List<Period>, positionToStart: Int): List<Weather> {
         val periodToGet = 5
+        //TODO: refactor name
         val currentDayForecast = period[0].Rep.size - 1
         var nextDayForecast = positionToStart
         var futureWeather = mutableListOf<Weather>()
@@ -63,6 +64,7 @@ class WeatherConverter {
 
         return futureWeather
     }
+
 
     private fun getThreeHourlyForecast(forecast: Rep, time: String): Weather {
         return Weather(

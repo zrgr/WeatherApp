@@ -1,6 +1,5 @@
 package com.example.weather
 
-import com.example.weather.models.app.WeatherForecast
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -17,7 +16,6 @@ class FutureWeatherGridAdapter : ListAdapter<Weather,
     ): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(weather: Weather) {
-            //binding.jacketNeeded.text = weather.jacketNeeded.toString()
             binding.weather = weather
             binding.executePendingBindings()
         }

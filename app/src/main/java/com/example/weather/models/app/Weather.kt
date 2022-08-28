@@ -1,7 +1,7 @@
 package com.example.weather.models.app
 
 data class Weather(
-    val jacketNeeded: Boolean,
+    val jacketNeeded: String,
     val chanceOfRain: String,
     val windSpeed: String,
     val temperature: String,
