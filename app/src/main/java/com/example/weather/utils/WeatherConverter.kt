@@ -27,7 +27,7 @@ class WeatherConverter {
             locationName = formatLocationName(forecast.SiteRep.DV.Location.name),
             dataDate = forecast.SiteRep.DV.dataDate,
             currentWeather = initialWeather,
-            futureWeather = getFutureForecast(forecast.SiteRep.DV.Location.Period, positionToStart),
+            futureWeather = getFutureForecast(forecast.SiteRep.DV.Location.Period, positionToStart + 1),
             weatherToDisplay = initialWeather
         )
     }
@@ -43,13 +43,13 @@ class WeatherConverter {
     private fun getFutureForecast(period: List<Period>, positionToStart: Int): List<Weather> {
         val periodToGet = 5
         //TODO: refactor name
-        val currentDayForecast = period[0].Rep.size - 1
+        val currentDayForecast = period[0].Rep.size
         var nextDayForecast = positionToStart
         var futureWeather = mutableListOf<Weather>()
 
         //Skip first forecast as it's already known
-        if(positionToStart != currentDayForecast) {
-            for (i in positionToStart..currentDayForecast) {
+        if(positionToStart < currentDayForecast) {
+            for (i in positionToStart until currentDayForecast) {
                 futureWeather.add(getThreeHourlyForecast(period[0].Rep[i], getForecastTime(i, i)))
             }
         }
@@ -116,7 +116,7 @@ class WeatherConverter {
         var timeOfFirstForecast = getTimeOfFirstForeCast(forecasts)
         var positionToStart = 0
 
-        while (timeOfFirstForecast < getCurrentHour() && (timeOfFirstForecast + 3) <= 21) {
+        while (timeOfFirstForecast < getCurrentHour() && (timeOfFirstForecast + 3) < 21) {
             positionToStart++
             timeOfFirstForecast += 3
         }
