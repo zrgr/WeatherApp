@@ -19,6 +19,7 @@ FutureWeatherGridAdapter.FutureWeatherViewHolder>(DiffCallback) {
 
         fun bind(weather: Weather, clickListener: FutureWeatherListener) {
             binding.weather = weather
+            binding.chanceOfRain.text = "${weather.chanceOfRain}% chance of rain at ${weather.time}"
             binding.clickListener = clickListener
             binding.executePendingBindings()
         }
