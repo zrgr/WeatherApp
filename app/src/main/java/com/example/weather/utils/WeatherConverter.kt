@@ -1,15 +1,11 @@
 package com.example.weather.utils
 
-import android.content.res.Resources
-import android.provider.Settings.System.getString
 import com.example.weather.R
 import com.example.weather.models.api.Forecast
 import com.example.weather.models.api.Period
 import com.example.weather.models.api.Rep
 import com.example.weather.models.app.Weather
 import com.example.weather.models.app.WeatherForecast
-import java.text.SimpleDateFormat
-import java.time.Duration
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.util.*
@@ -77,7 +73,8 @@ class WeatherConverter {
             temperature = forecast.T,
             weatherType = forecast.W,
             temperatureFeelsLike = forecast.F,
-            time = time
+            time = time,
+            weatherTypeImage = getImage(forecast.W.toInt())
         )
     }
 
@@ -122,5 +119,34 @@ class WeatherConverter {
         }
 
         return positionToStart
+    }
+
+    private fun getImage(weatherType: Int): Int {
+        return when (weatherType) {
+            0 -> R.drawable.weather_type_clear_night
+            1 -> R.drawable.weather_type_sunny_day
+            2 -> R.drawable.weather_type_partly_cloudy_day
+            3 -> R.drawable.weather_type_partly_cloudy_day
+            5, 6, 7, 8 -> R.drawable.weather_type_assorted
+            9 -> R.drawable.weather_type_light_rain_shower_night
+            10, 11 -> R.drawable.weather_type_light_rain_day
+            12 -> R.drawable.weather_type_light_rain
+            13 -> R.drawable.weather_type_heavy_rain_night
+            14 -> R.drawable.weather_type_heavy_rain_day
+            15 -> R.drawable.weather_type_heavy_rain_day
+            16 -> R.drawable.weather_type_sleet_shower_night
+            17, 18 -> R.drawable.weather_type_sleet_shower_day
+            19 -> R.drawable.weather_type_hail_shower_night
+            20, 21 -> R.drawable.weather_type_hail_shower_day
+            23 -> R.drawable.weather_type_light_snow_night
+            24 -> R.drawable.weather_type_light_snow_day
+            25 -> R.drawable.weather_type_heavy_snow_night
+            26 -> R.drawable.weather_type_heavy_snow_day
+            27 -> R.drawable.weather_type_heavy_snow_day
+            28 -> R.drawable.weather_type_thunder_night
+            29 -> R.drawable.weather_type_thunder_day
+            30 -> R.drawable.weather_type_thunder
+            else -> R.drawable.weather_type_partly_cloudy_day
+        }
     }
 }

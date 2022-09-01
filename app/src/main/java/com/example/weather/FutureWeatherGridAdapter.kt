@@ -21,6 +21,9 @@ FutureWeatherGridAdapter.FutureWeatherViewHolder>(DiffCallback) {
             binding.weather = weather
             binding.chanceOfRain.text = "${weather.chanceOfRain}% chance of rain at ${weather.time}"
             binding.clickListener = clickListener
+
+            binding.weatherType.setImageResource(weather.weatherTypeImage)
+
             binding.executePendingBindings()
         }
     }
