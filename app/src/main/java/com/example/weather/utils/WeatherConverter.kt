@@ -74,7 +74,8 @@ class WeatherConverter {
             weatherType = forecast.W,
             temperatureFeelsLike = forecast.F,
             time = time,
-            weatherTypeImage = getImage(forecast.W.toInt())
+            weatherTypeImage = getImage(forecast.W.toInt()),
+            weatherTypeDescription = getWeatherDescription(forecast.W.toInt())
         )
     }
 
@@ -147,6 +148,34 @@ class WeatherConverter {
             29 -> R.drawable.weather_type_thunder_day
             30 -> R.drawable.weather_type_thunder
             else -> R.drawable.weather_type_partly_cloudy_day
+        }
+    }
+
+    private fun getWeatherDescription(weatherType: Int): Int {
+        return when (weatherType) {
+            0 -> R.string.weather_type_clear_night
+            1 -> R.string.weather_type_clear_night
+            2, 3 -> R.string.weather_type_partly_cloudy
+            5 -> R.string.weather_type_mist
+            6 -> R.string.weather_type_fog
+            7 -> R.string.weather_type_cloudy
+            8 -> R.string.weather_type_overcast
+            9, 10 -> R.string.weather_type_light_rain_shower
+            11 -> R.string.weather_type_drizzle
+            12 -> R.string.weather_type_light_rain
+            13, 14 -> R.string.weather_type_heavy_rain_shower
+            15 -> R.string.weather_type_heavy_rain
+            16, 17 -> R.string.weather_type_sleet_shower
+            18 -> R.string.weather_type_sleet
+            19, 20 -> R.string.weather_type_hail_shower
+            21 -> R.string.weather_type_hail
+            22, 23 -> R.string.weather_type_light_snow_shower
+            24 -> R.string.weather_type_light_snow
+            25, 26 -> R.string.weather_type_heavy_snow_shower
+            27 -> R.string.weather_type_heavy_snow
+            28, 29 -> R.string.weather_type_thunder_shower
+            30 -> R.string.weather_type_thunder
+            else -> R.string.weather_type_not_available
         }
     }
 }

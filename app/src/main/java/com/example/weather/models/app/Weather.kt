@@ -8,5 +8,6 @@ data class Weather(
     val weatherType: String,
     val temperatureFeelsLike: String,
     val time: String,
-    val weatherTypeImage: Int
+    val weatherTypeImage: Int,
+    val weatherTypeDescription: Int
 )

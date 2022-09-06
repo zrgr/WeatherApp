@@ -39,6 +39,9 @@ class JacketFragment : Fragment() {
             binding.currentChanceRain.text = getString(R.string.current_chance_rain, chanceOfRain, location)
             binding.weatherType.setImageResource(data.weatherToDisplay.weatherTypeImage)
             binding.temperature.text = getString(R.string.temperature, data.weatherToDisplay.temperature)
+            binding.temperatureFeelsLike.text = getString(R.string.temperature_feels_like, data.weatherToDisplay.temperatureFeelsLike)
+            binding.windSpeed.text = getString(R.string.wind_speed, data.weatherToDisplay.windSpeed)
+            binding.weatherTypeDescription.text = getString(data.weatherToDisplay.weatherTypeDescription)
             setWeather(chanceOfRain.toFloat(), currentWindSpeed)
         }
 
