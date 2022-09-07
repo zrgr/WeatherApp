@@ -1,5 +1,7 @@
 package com.example.weather
 
+import android.content.Context
+import android.provider.Settings.System.getString
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -14,16 +16,16 @@ class FutureWeatherGridAdapter (
 FutureWeatherGridAdapter.FutureWeatherViewHolder>(DiffCallback) {
 
     class FutureWeatherViewHolder(
-        private var binding: FutureWeatherBinding
+        private var binding: FutureWeatherBinding,
+        private var context: Context
     ): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(weather: Weather, clickListener: FutureWeatherListener) {
             binding.weather = weather
             binding.chanceOfRain.text = "${weather.chanceOfRain}% chance of rain at ${weather.time}"
             binding.clickListener = clickListener
-
             binding.weatherType.setImageResource(weather.weatherTypeImage)
-
+            binding.weatherTypeDescription.text = context.resources.getString(weather.weatherTypeDescription)
             binding.executePendingBindings()
         }
     }
@@ -43,7 +45,7 @@ FutureWeatherGridAdapter.FutureWeatherViewHolder>(DiffCallback) {
         viewType: Int
     ): FutureWeatherGridAdapter.FutureWeatherViewHolder {
         return FutureWeatherViewHolder(FutureWeatherBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false))
+            LayoutInflater.from(parent.context), parent, false), parent.context)
     }
 
     override fun onBindViewHolder(holder: FutureWeatherGridAdapter.FutureWeatherViewHolder, position: Int) {
