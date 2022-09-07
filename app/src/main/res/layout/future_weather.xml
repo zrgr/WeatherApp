@@ -15,8 +15,8 @@
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="125dp"
-        android:layout_height="125dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginStart="16dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="5dp"
@@ -31,11 +31,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:textSize="32dp"
                 android:text="@{weather.jacketNeeded}"
+                android:textSize="32dp"
+                app:layout_constraintBottom_toBottomOf="@+id/weather_type"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 tools:text="Yes" />
 
             <TextView
@@ -43,18 +42,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/jacket_needed"
                 tools:text="50" />
 
             <ImageView
                 android:id="@+id/weather_type"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginTop="-12dp"
+                android:layout_marginEnd="-12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
