@@ -89,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="8dp"
-                    android:textSize="24dp"
+                    android:textSize="16dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/temperature"
                     tools:text="Feels like 5°C" />
@@ -100,7 +100,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="8dp"
-                    android:textSize="24dp"
+                    android:textSize="16dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/temperature_feels_like"
                     tools:text="5mph winds" />
@@ -109,6 +109,7 @@
                     android:id="@+id/weather_type_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="24dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="8dp"
                     app:layout_constraintStart_toStartOf="parent"

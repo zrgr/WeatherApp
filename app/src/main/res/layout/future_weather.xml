@@ -47,7 +47,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/jacket_needed"
-                tools:text="50" />
+                tools:text="50% chance of rain at 00:00" />
 
             <ImageView
                 android:id="@+id/weather_type"

@@ -9,7 +9,7 @@
         <entry key="app/src/main/res/drawable/loading_img.xml" value="0.152" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_jacket.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/future_weather.xml" value="0.6582278481012658" />
+        <entry key="app/src/main/res/layout/future_weather.xml" value="0.25" />
       </map>
     </option>
   </component>
