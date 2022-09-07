@@ -70,6 +70,7 @@ class WeatherConverter {
             chanceOfRain = forecast.Pp,
             jacketNeeded = jacketNeeded(forecast.Pp.toInt()),
             windSpeed = forecast.S,
+            windGust = forecast.G,
             temperature = forecast.T,
             weatherType = forecast.W,
             temperatureFeelsLike = forecast.F,

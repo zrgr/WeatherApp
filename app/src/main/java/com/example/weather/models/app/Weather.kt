@@ -4,6 +4,7 @@ data class Weather(
     val jacketNeeded: String,
     var chanceOfRain: String,
     val windSpeed: String,
+    val windGust: String,
     val temperature: String,
     val weatherType: String,
     val temperatureFeelsLike: String,
