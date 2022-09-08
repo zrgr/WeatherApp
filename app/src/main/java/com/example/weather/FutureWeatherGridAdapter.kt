@@ -22,7 +22,7 @@ FutureWeatherGridAdapter.FutureWeatherViewHolder>(DiffCallback) {
 
         fun bind(weather: Weather, clickListener: FutureWeatherListener) {
             binding.weather = weather
-            binding.chanceOfRain.text = "${weather.chanceOfRain}% chance of rain at ${weather.time}"
+            binding.chanceOfRain.text = context.resources.getString(R.string.future_chance_of_rain, weather.chanceOfRain, weather.time)
             binding.clickListener = clickListener
             binding.weatherType.setImageResource(weather.weatherTypeImage)
             binding.weatherTypeDescription.text = context.resources.getString(weather.weatherTypeDescription)

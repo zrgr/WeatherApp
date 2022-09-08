@@ -6,6 +6,7 @@
     <string name="temperature">%1$s°C</string>
     <string name="temperature_feels_like">Feels like %1$s°C</string>
     <string name="wind_speed">%1$s mph winds</string>
+    <string name="future_chance_of_rain">%1$s%% chance of rain at %2$s</string>
     <string name="weather_type_clear_night">Clear night</string>
     <string name="weather_type_sunny_day">Sunny day</string>
     <string name="weather_type_partly_cloudy">Partly cloudy</string>
