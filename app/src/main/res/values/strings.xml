@@ -30,5 +30,7 @@
     <string name="weather_type_thunder_shower">Thunder shower</string>
     <string name="weather_type_thunder">Thunder</string>
     <string name="weather_type_not_available">Weather type not available</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
