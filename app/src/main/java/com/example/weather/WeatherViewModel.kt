@@ -31,14 +31,14 @@ class WeatherViewModel : ViewModel(){
     private val _converter = WeatherConverter()
 
     init {
-        getWeatherForecast("324159", "3hourly")
+        getWeatherForecast("324159")
     }
 
-    fun getWeatherForecast(location: String, res: String) {
+    fun getWeatherForecast(location: String) {
         viewModelScope.launch {
             _status.value = WeatherApiStatus.LOADING
             try {
-                val forecast = _repo.getWeather(location, res)
+                val forecast = _repo.getWeather(location, "3hourly")
                 _weather.value = _converter.convertForecast(forecast)
                 setValues(forecast)
                 _status.value = WeatherApiStatus.DONE
