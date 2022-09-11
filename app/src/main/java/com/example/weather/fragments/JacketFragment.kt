@@ -1,23 +1,16 @@
 package com.example.weather.fragments
 
 import android.graphics.Color
-import android.graphics.Typeface
 import android.os.Bundle
-import android.os.Handler
 import android.text.Spannable
-import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
 import android.text.style.*
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.text.toSpannable
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.weather.FutureWeatherGridAdapter
@@ -25,7 +18,6 @@ import com.example.weather.FutureWeatherListener
 import com.example.weather.R
 import com.example.weather.WeatherViewModel
 import com.example.weather.databinding.FragmentJacketBinding
-import com.example.weather.models.app.Weather
 import com.example.weather.models.app.WeatherForecast
 import com.github.matteobattilana.weather.PrecipType
 
