@@ -19,6 +19,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.text.toSpannable
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.weather.FutureWeatherGridAdapter
 import com.example.weather.FutureWeatherListener
 import com.example.weather.R
@@ -102,7 +103,8 @@ class JacketFragment : Fragment() {
 
         val changeLocation = object : ClickableSpan() {
             override fun onClick(view: View) {
-                Toast.makeText(view.context, "Location Clicked!", Toast.LENGTH_SHORT).show()
+                findNavController().
+                        navigate(R.id.action_jacketFragment_to_locationFragment)
             }
         }
 
