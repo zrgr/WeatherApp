@@ -74,20 +74,28 @@ class JacketFragment : Fragment() {
     }
 
     private fun createChanceOfRainText(weather: WeatherForecast) {
+        binding.currentChanceRain.text = createLocationSpannable(weather)
+        binding.currentChanceRain.movementMethod = LinkMovementMethod.getInstance()
+        binding.currentChanceRain.highlightColor = Color.TRANSPARENT
+    }
+
+    private fun createLocationSpannable(weather: WeatherForecast): Spannable {
+
         val chanceOfRain = weather.weatherToDisplay.chanceOfRain
         val location = weather.locationName
         var chanceOfRainText = getString(R.string.current_chance_rain, chanceOfRain, location)
-        val spannable = SpannableStringBuilder(chanceOfRainText)
+
+        val locationSpannable = SpannableStringBuilder(chanceOfRainText)
         val highlightStartPos = chanceOfRainText.length - location.length
         val highlightEndPos = chanceOfRainText.length
 
-        spannable.setSpan(
+        locationSpannable.setSpan(
             ForegroundColorSpan(Color.GREEN),
             highlightStartPos, highlightEndPos,
             Spannable.SPAN_INCLUSIVE_INCLUSIVE
         )
 
-        spannable.setSpan(
+        locationSpannable.setSpan(
             UnderlineSpan(),
             highlightStartPos, highlightEndPos,
             Spannable.SPAN_INCLUSIVE_INCLUSIVE
@@ -96,18 +104,16 @@ class JacketFragment : Fragment() {
         val changeLocation = object : ClickableSpan() {
             override fun onClick(view: View) {
                 findNavController().
-                        navigate(R.id.action_jacketFragment_to_locationFragment)
+                navigate(R.id.action_jacketFragment_to_locationFragment)
             }
         }
 
-        spannable.setSpan(
+        locationSpannable.setSpan(
             changeLocation,
             highlightStartPos, highlightEndPos,
             Spannable.SPAN_INCLUSIVE_INCLUSIVE
         )
 
-        binding.currentChanceRain.text = spannable
-        binding.currentChanceRain.movementMethod = LinkMovementMethod.getInstance()
-        binding.currentChanceRain.highlightColor = Color.TRANSPARENT
+        return locationSpannable
     }
 }
