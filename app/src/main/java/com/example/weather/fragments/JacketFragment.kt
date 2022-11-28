@@ -1,5 +1,6 @@
 package com.example.weather.fragments
 
+import android.app.Fragment
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
@@ -69,7 +70,7 @@ class JacketFragment : Fragment() {
             angle = windSpeed
             fadeOutPercent = 1f
             colour = Color.parseColor("#0214fa")
-            scaleFactor = 3f
+            scaleFactor = 5f
         }
     }
 
