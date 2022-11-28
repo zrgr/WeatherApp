@@ -25,7 +25,7 @@ class LocationRepository private constructor(
         .build()
 
     fun getLocations(): Flow<List<Location>> = database.locationDao().getLocations()
-    suspend fun getCrime(id: UUID): Location = database.locationDao().getLocation(id)
+    suspend fun getCrime(id: String): Location = database.locationDao().getLocation(id)
 
     companion object {
         private var INSTANCE: LocationRepository? = null
