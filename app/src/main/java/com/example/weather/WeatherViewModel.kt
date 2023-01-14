@@ -5,18 +5,25 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.weather.database.LocationRepository
 import com.example.weather.models.api.Forecast
 import com.example.weather.models.app.Weather
 import com.example.weather.models.app.WeatherForecast
+import com.example.weather.models.database.Location
 import com.example.weather.repository.WeatherRepository
 import com.example.weather.utils.WeatherConverter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 private const val TAG = "WeatherViewModel"
 
 enum class WeatherApiStatus { LOADING, ERROR, DONE }
 
-class WeatherViewModel : ViewModel(){
+class WeatherViewModel : ViewModel() {
+
+    private val locationRepository = LocationRepository.get()
 
     private val _weather = MutableLiveData<WeatherForecast>()
     val weather: LiveData<WeatherForecast> = _weather
@@ -30,8 +37,29 @@ class WeatherViewModel : ViewModel(){
     private val _repo = WeatherRepository()
     private val _converter = WeatherConverter()
 
+//    private val _locations: MutableStateFlow<List<Location>> = MutableStateFlow(emptyList())
+//    val locations: StateFlow<List<Location>>
+//        get() = _locations.asStateFlow()
+
+    var locations: List<Location> = emptyList()
+
+    var location: Location? = null
+
     init {
-        getWeatherForecast("324159")
+        //getWeatherForecast("324159")
+//        viewModelScope.launch {
+//            locationRepository.getLocations().collect {
+//                _locations.value = it
+//            }
+//        }
+
+        viewModelScope.launch {
+            try {
+                location = getLocationFromDb()
+            } catch(e: Exception) {
+                Log.e(TAG, "error with room");
+            }
+        }
     }
 
     fun getWeatherForecast(location: String) {
@@ -47,6 +75,34 @@ class WeatherViewModel : ViewModel(){
                 Log.e(TAG, "getWeatherForecast() Api call failed");
             }
         }
+    }
+
+    fun getLocationFromDb(): Location? {
+        //var location: Location? = null
+        viewModelScope.launch {
+            location = locationRepository.getLocation("3")
+        }
+
+        return location
+    }
+
+//    private suspend fun getLocations() {
+//        CoroutineScope(Dispatchers.IO).launch {
+//            locations = locationRepository.getLocations()
+//        }
+//    }
+//
+    fun getFirstLocation(): Location {
+        var locations: List<Location> = emptyList()
+        viewModelScope.launch {
+            try {
+                locations = locationRepository.getLocations()
+            } catch(e: Exception) {
+                Log.e(TAG, "error with room");
+            }
+        }
+
+        return locations[0]
     }
 
     private fun setValues(forecast: Forecast) {

@@ -1,26 +1,28 @@
 package com.example.weather.fragments
 
-import android.app.Fragment
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
 import android.text.style.*
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
-import com.example.weather.FutureWeatherGridAdapter
-import com.example.weather.FutureWeatherListener
-import com.example.weather.R
-import com.example.weather.WeatherViewModel
+import com.example.weather.*
 import com.example.weather.databinding.FragmentJacketBinding
 import com.example.weather.models.app.WeatherForecast
 import com.github.matteobattilana.weather.PrecipType
+import kotlinx.coroutines.launch
 
 
 class JacketFragment : Fragment() {
@@ -41,7 +43,9 @@ class JacketFragment : Fragment() {
 
             val currentWindSpeed = data.weatherToDisplay.windSpeed.toInt()
 
-            binding.jacket.text = data.weatherToDisplay.jacketNeeded
+
+            //TODO: Change this to binding apply
+            ///binding.jacket.text = viewModel.userLocation?.name //data.weatherToDisplay.jacketNeeded
 
             binding.weatherType.setImageResource(data.weatherToDisplay.weatherTypeImage)
             binding.temperature.text = getString(R.string.temperature, data.weatherToDisplay.temperature)
@@ -60,6 +64,21 @@ class JacketFragment : Fragment() {
         })
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+//        viewLifecycleOwner.lifecycleScope.launch {
+//            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                viewModel.locations.collect { location ->
+//                        binding.jacket.text = location[1].id
+//                }
+//            }
+//        }
+
+
+        binding.jacket.text = viewModel.location?.name ?: "Jello"
     }
 
     private fun setWeather(chanceOfRain: Float, windSpeed: Int) {
