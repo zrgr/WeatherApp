@@ -1,6 +1,6 @@
 package com.example.weather.fragments
 
-import android.app.Fragment
+//import android.app.Fragment
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
