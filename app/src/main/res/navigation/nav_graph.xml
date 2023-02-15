@@ -8,10 +8,14 @@
     <fragment
         android:id="@+id/jacketFragment"
         android:name="com.example.weather.fragments.JacketFragment"
-        android:label="JacketFragment" >
+        android:label="JacketFragment"
+        tools:layout="@layout/fragment_jacket">
         <action
             android:id="@+id/action_jacketFragment_to_locationFragment"
             app:destination="@id/locationFragment" />
+        <action
+            android:id="@+id/action_jacketFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/locationFragment"
@@ -20,6 +24,14 @@
         tools:layout="@layout/fragment_location" >
         <action
             android:id="@+id/action_locationFragment_to_jacketFragment"
+            app:destination="@id/jacketFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.weather.fragments.SettingsFragment"
+        android:label="SettingsFragment" >
+        <action
+            android:id="@+id/action_settingsFragment_to_jacketFragment"
             app:destination="@id/jacketFragment" />
     </fragment>
 </navigation>

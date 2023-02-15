@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.preference.PreferenceManager
 import com.example.weather.FutureWeatherGridAdapter
 import com.example.weather.FutureWeatherListener
 import com.example.weather.R
@@ -60,6 +61,21 @@ class JacketFragment : Fragment() {
         })
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        binding.fabSettings.setOnClickListener {
+            findNavController().navigate(R.id.action_jacketFragment_to_settingsFragment)
+        }
+
+        loadSettings()
+    }
+
+    private fun loadSettings() {
+        val sp = PreferenceManager.getDefaultSharedPreferences(requireActivity())
+
+        val jacketNeeded = sp.getInt("jacket_needed", 30)
     }
 
     private fun setWeather(chanceOfRain: Float, windSpeed: Int) {
