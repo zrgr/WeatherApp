@@ -38,32 +38,33 @@ class JacketFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        viewModel.weather.observe(viewLifecycleOwner) { data ->
-
-            val currentWindSpeed = data.weatherToDisplay.windSpeed.toInt()
-
-            binding.jacket.text = data.weatherToDisplay.jacketNeeded
-
-            binding.weatherType.setImageResource(data.weatherToDisplay.weatherTypeImage)
-            binding.temperature.text = getString(R.string.temperature, data.weatherToDisplay.temperature)
-            binding.temperatureFeelsLike.text = getString(R.string.temperature_feels_like, data.weatherToDisplay.temperatureFeelsLike)
-            binding.windSpeed.text = getString(R.string.wind_speed, data.weatherToDisplay.windSpeed)
-            binding.weatherTypeDescription.text = getString(data.weatherToDisplay.weatherTypeDescription)
-
-            createChanceOfRainText(data)
-            setWeather(data.weatherToDisplay.chanceOfRain.toFloat(), currentWindSpeed)
-        }
-
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-
-        binding.futureWeather.adapter = FutureWeatherGridAdapter( FutureWeatherListener { weather ->
-            viewModel.updateWeatherDisplay(weather)
-        })
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        viewModel.weather.observe(viewLifecycleOwner) { data ->
+
+            val currentWindSpeed = data.weatherToDisplay.windSpeed.toInt()
+
+            binding.apply {
+                jacket.text = data.weatherToDisplay.jacketNeeded
+                weatherType.setImageResource(data.weatherToDisplay.weatherTypeImage)
+                temperature.text = getString(R.string.temperature, data.weatherToDisplay.temperature)
+                temperatureFeelsLike.text = getString(R.string.temperature_feels_like, data.weatherToDisplay.temperatureFeelsLike)
+                windSpeed.text = getString(R.string.wind_speed, data.weatherToDisplay.windSpeed)
+                weatherTypeDescription.text = getString(data.weatherToDisplay.weatherTypeDescription)
+            }
+
+            createChanceOfRainText(data)
+            setWeather(data.weatherToDisplay.chanceOfRain.toFloat(), currentWindSpeed)
+        }
+
+        binding.futureWeather.adapter = FutureWeatherGridAdapter( FutureWeatherListener { weather ->
+            viewModel.updateWeatherDisplay(weather)
+        })
 
         binding.fabSettings.setOnClickListener {
             findNavController().navigate(R.id.action_jacketFragment_to_settingsFragment)
