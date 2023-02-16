@@ -28,8 +28,28 @@ class WeatherConverter {
         )
     }
 
+    fun convertForecast(forecast: Forecast, jacketNeeded: Int): WeatherForecast {
+
+        //Get position of most recent forecast
+        val positionToStart = getForecastTimeStepStartPosition(forecast.SiteRep.DV.Location.Period[0].Rep)
+
+        val initialWeather = getThreeHourlyForecast(forecast.SiteRep.DV.Location.Period[0].Rep[positionToStart], getForecastTime(forecast.SiteRep.DV.Location.Period[0].Rep.size, positionToStart), jacketNeeded)
+
+        return WeatherForecast(
+            locationName = formatLocationName(forecast.SiteRep.DV.Location.name),
+            dataDate = forecast.SiteRep.DV.dataDate,
+            currentWeather = initialWeather,
+            futureWeather = getFutureForecast(forecast.SiteRep.DV.Location.Period, positionToStart + 1),
+            weatherToDisplay = initialWeather
+        )
+    }
+
     private fun jacketNeeded(chanceOfRain: Int): String {
         return if (chanceOfRain > 30) "Yes" else "No"
+    }
+
+    private fun jacketNeeded(chanceOfRain: Int, jacketNeeded: Int): String {
+        return if (chanceOfRain > jacketNeeded) "Yes" else "No"
     }
 
     private fun formatLocationName(location: String): String {
@@ -64,11 +84,26 @@ class WeatherConverter {
         return futureWeather
     }
 
-
     private fun getThreeHourlyForecast(forecast: Rep, time: String): Weather {
         return Weather(
             chanceOfRain = forecast.Pp,
             jacketNeeded = jacketNeeded(forecast.Pp.toInt()),
+            windSpeed = forecast.S,
+            windGust = forecast.G,
+            temperature = forecast.T,
+            weatherType = forecast.W,
+            temperatureFeelsLike = forecast.F,
+            time = time,
+            weatherTypeImage = getImage(forecast.W.toInt()),
+            weatherTypeDescription = getWeatherDescription(forecast.W.toInt())
+        )
+    }
+
+
+    private fun getThreeHourlyForecast(forecast: Rep, time: String, jacketNeeded: Int): Weather {
+        return Weather(
+            chanceOfRain = forecast.Pp,
+            jacketNeeded = jacketNeeded(forecast.Pp.toInt(), jacketNeeded),
             windSpeed = forecast.S,
             windGust = forecast.G,
             temperature = forecast.T,

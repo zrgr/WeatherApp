@@ -45,6 +45,13 @@ class JacketFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+
+        val sp = PreferenceManager.getDefaultSharedPreferences(requireActivity())
+
+        val jacketNeeded = sp.getInt("jacket_needed", 30)
+
+        viewModel.getWeatherForecast("324159", jacketNeeded)
+
         viewModel.weather.observe(viewLifecycleOwner) { data ->
 
             val currentWindSpeed = data.weatherToDisplay.windSpeed.toInt()
@@ -70,7 +77,7 @@ class JacketFragment : Fragment() {
             findNavController().navigate(R.id.action_jacketFragment_to_settingsFragment)
         }
 
-        loadSettings()
+        //loadSettings()
     }
 
     private fun loadSettings() {
