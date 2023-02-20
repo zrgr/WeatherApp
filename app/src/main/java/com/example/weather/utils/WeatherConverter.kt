@@ -12,22 +12,6 @@ import java.util.*
 
 class WeatherConverter {
 
-    fun convertForecast(forecast: Forecast): WeatherForecast {
-
-        //Get position of most recent forecast
-        val positionToStart = getForecastTimeStepStartPosition(forecast.SiteRep.DV.Location.Period[0].Rep)
-
-        val initialWeather = getThreeHourlyForecast(forecast.SiteRep.DV.Location.Period[0].Rep[positionToStart], getForecastTime(forecast.SiteRep.DV.Location.Period[0].Rep.size, positionToStart))
-
-        return WeatherForecast(
-            locationName = formatLocationName(forecast.SiteRep.DV.Location.name),
-            dataDate = forecast.SiteRep.DV.dataDate,
-            currentWeather = initialWeather,
-            futureWeather = getFutureForecast(forecast.SiteRep.DV.Location.Period, positionToStart + 1),
-            weatherToDisplay = initialWeather
-        )
-    }
-
     fun convertForecast(forecast: Forecast, jacketNeeded: Int): WeatherForecast {
 
         //Get position of most recent forecast
@@ -39,13 +23,9 @@ class WeatherConverter {
             locationName = formatLocationName(forecast.SiteRep.DV.Location.name),
             dataDate = forecast.SiteRep.DV.dataDate,
             currentWeather = initialWeather,
-            futureWeather = getFutureForecast(forecast.SiteRep.DV.Location.Period, positionToStart + 1),
+            futureWeather = getFutureForecast(forecast.SiteRep.DV.Location.Period, positionToStart + 1, jacketNeeded),
             weatherToDisplay = initialWeather
         )
-    }
-
-    private fun jacketNeeded(chanceOfRain: Int): String {
-        return if (chanceOfRain > 30) "Yes" else "No"
     }
 
     private fun jacketNeeded(chanceOfRain: Int, jacketNeeded: Int): String {
@@ -56,7 +36,7 @@ class WeatherConverter {
         return location.lowercase().replaceFirstChar { it.uppercase() }
     }
 
-    private fun getFutureForecast(period: List<Period>, positionToStart: Int): List<Weather> {
+    private fun getFutureForecast(period: List<Period>, positionToStart: Int, jacketNeeded: Int): List<Weather> {
         val periodToGet = 5
         //TODO: refactor name
         val currentDayForecast = period[0].Rep.size
@@ -66,7 +46,7 @@ class WeatherConverter {
         //Skip first forecast as it's already known
         if(positionToStart < currentDayForecast) {
             for (i in positionToStart until currentDayForecast) {
-                futureWeather.add(getThreeHourlyForecast(period[0].Rep[i], getForecastTime(i, i)))
+                futureWeather.add(getThreeHourlyForecast(period[0].Rep[i], getForecastTime(i, i), jacketNeeded))
             }
         }
 
@@ -77,28 +57,12 @@ class WeatherConverter {
 
         if (nextDayForecast != 0) {
             for (i in 0 until nextDayForecast) {
-                futureWeather.add(getThreeHourlyForecast(period[1].Rep[i], getForecastTime(period[1].Rep.size, i)))
+                futureWeather.add(getThreeHourlyForecast(period[1].Rep[i], getForecastTime(period[1].Rep.size, i), jacketNeeded))
             }
         }
 
         return futureWeather
     }
-
-    private fun getThreeHourlyForecast(forecast: Rep, time: String): Weather {
-        return Weather(
-            chanceOfRain = forecast.Pp,
-            jacketNeeded = jacketNeeded(forecast.Pp.toInt()),
-            windSpeed = forecast.S,
-            windGust = forecast.G,
-            temperature = forecast.T,
-            weatherType = forecast.W,
-            temperatureFeelsLike = forecast.F,
-            time = time,
-            weatherTypeImage = getImage(forecast.W.toInt()),
-            weatherTypeDescription = getWeatherDescription(forecast.W.toInt())
-        )
-    }
-
 
     private fun getThreeHourlyForecast(forecast: Rep, time: String, jacketNeeded: Int): Weather {
         return Weather(

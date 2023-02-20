@@ -32,7 +32,6 @@ class LocationFragment : Fragment() {
     }
 
     private fun setLocation(location: String) {
-        viewModel.getWeatherForecast(location)
         findNavController()
             .navigate(R.id.action_locationFragment_to_jacketFragment)
 

@@ -31,30 +31,11 @@ class WeatherViewModel : ViewModel(){
     private val _repo = WeatherRepository()
     private val _converter = WeatherConverter()
 
-    init {
-        //getWeatherForecast("324159")
-    }
-
-    fun getWeatherForecast(location: String) {
-        viewModelScope.launch {
-            _status.value = WeatherApiStatus.LOADING
-            try {
-                val forecast = _repo.getWeather(location, "3hourly")
-                _weather.value = _converter.convertForecast(forecast)
-                setValues(forecast)
-                _status.value = WeatherApiStatus.DONE
-            } catch (e: Exception) {
-                _status.value = WeatherApiStatus.ERROR
-                Log.e(TAG, "getWeatherForecast() Api call failed");
-            }
-        }
-    }
-
     fun getWeatherForecast(location: String, jacketNeeded: Int) {
         viewModelScope.launch {
             _status.value = WeatherApiStatus.LOADING
             try {
-                val forecast = _repo.getWeather(location, "3hourly")
+                val forecast = _repo.getWeather(location)
                 _weather.value = _converter.convertForecast(forecast, jacketNeeded)
                 setValues(forecast)
                 _status.value = WeatherApiStatus.DONE
