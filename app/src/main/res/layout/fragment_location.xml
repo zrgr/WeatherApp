@@ -63,7 +63,10 @@
                         android:background="@drawable/edit_text_border"
                         android:hint="Search by name"
                         android:paddingLeft="25dp"
-                        app:endIconMode="clear_text">
+                        android:maxLines="1"
+                        android:inputType="text"
+                        android:paddingRight="25dp"
+                        android:drawableEnd="@drawable/ic_clear">
 
                     </EditText>
 
