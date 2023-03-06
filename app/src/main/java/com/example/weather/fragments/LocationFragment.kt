@@ -58,8 +58,6 @@ class LocationFragment : Fragment() {
             getLocation()
         }
 
-        Toast.makeText(requireContext(), "Hello", Toast.LENGTH_SHORT).show()
-
         return binding.root
     }
 
