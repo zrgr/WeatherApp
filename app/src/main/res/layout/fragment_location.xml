@@ -56,20 +56,32 @@
                         app:layout_constraintTop_toTopOf="@+id/location"
                         app:srcCompat="@drawable/ic_arrow_back" />
 
-                    <EditText
-                        android:id="@+id/location"
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@drawable/edit_text_border"
-                        android:hint="Search by name"
-                        android:paddingLeft="25dp"
-                        android:maxLines="1"
-                        android:inputType="text"
-                        android:paddingRight="25dp"
-                        android:drawableEnd="@drawable/ic_clear">
+                        android:layout_height="wrap_content" >
 
-                    </EditText>
+                        <EditText
+                            android:id="@+id/location"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/edit_text_border"
+                            android:hint="Search by name"
+                            android:paddingLeft="25dp"
+                            android:maxLines="1"
+                            android:inputType="text"
+                            android:paddingRight="25dp"/>
 
+                        <ImageView
+                            android:id="@+id/clearTextIcon"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignRight="@+id/location"
+                            android:layout_marginRight="10dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_clear" />
+
+                    </RelativeLayout>
                 </LinearLayout>
 
                 <TextView

@@ -58,6 +58,10 @@ class LocationFragment : Fragment() {
             getLocation()
         }
 
+        binding.clearTextIcon.setOnClickListener {
+            binding.location.text.clear()
+        }
+
         return binding.root
     }
 
