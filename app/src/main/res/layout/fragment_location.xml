@@ -17,22 +17,56 @@
 
         <EditText
             android:id="@+id/location"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
+            android:layout_width="300dp"
+            android:layout_height="75dp"
+            android:hint="Search by name"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
         </EditText>
-        
-        <Button
-            android:id="@+id/find_button"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:text="Find"
-            app:layout_constraintEnd_toEndOf="@+id/location"
-            app:layout_constraintStart_toStartOf="@+id/location"
-            app:layout_constraintTop_toBottomOf="@+id/location"></Button>
+
+        <TextView
+            android:id="@+id/orText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="OR"
+            android:textSize="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/location" />
+
+
+        <LinearLayout
+            android:id="@+id/getCurrentLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/orText">
+
+
+            <TextView
+                android:id="@+id/getCurrentLocationText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Get Current location"
+                android:textColor="@color/black"
+                android:textSize="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/orText" />
+
+            <ImageView
+                android:id="@+id/addCurrentLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_add_location"
+                android:layout_marginLeft="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/getCurrentLocationText" />
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
