@@ -31,30 +31,43 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/back_arrow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#F48E1D"
-                    android:importantForAccessibility="no"
-                    app:layout_constraintBottom_toBottomOf="@+id/location"
-                    app:layout_constraintEnd_toStartOf="@+id/location"
-                    app:layout_constraintTop_toTopOf="@+id/location"
-                    app:srcCompat="@drawable/ic_arrow_back"
-                    tools:visibility="visible" />
 
-                <EditText
-                    android:id="@+id/location"
-                    android:layout_width="0dp"
-                    android:layout_marginHorizontal="48dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/edit_text_border"
-                    android:hint="Search by name"
+                <LinearLayout
+                    android:id="@+id/enterLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="48dp"
-                    android:paddingLeft="10dp"
+                    android:layout_marginHorizontal="40dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"></EditText>
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/back_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="8dp"
+                        android:backgroundTint="#F48E1D"
+                        android:importantForAccessibility="no"
+                        app:layout_constraintBottom_toBottomOf="@+id/location"
+                        app:layout_constraintEnd_toStartOf="@+id/location"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/location"
+                        app:srcCompat="@drawable/ic_arrow_back" />
+
+                    <EditText
+                        android:id="@+id/location"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/edit_text_border"
+                        android:hint="Search by name"
+                        android:paddingLeft="25dp"
+                        app:endIconMode="clear_text">
+
+                    </EditText>
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/orText"
@@ -65,38 +78,24 @@
                     android:textSize="24dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/location" />
+                    app:layout_constraintTop_toBottomOf="@+id/enterLocation" />
 
 
-                <LinearLayout
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/getCurrentLocation"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginHorizontal="40dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/rounded_button"
+                    android:text="Get Current location"
+                    android:textColor="@color/white"
+                    app:backgroundTint="#30dbb3"
+                    app:icon="@drawable/ic_add_location"
+                    app:iconGravity="end"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/orText">
-
-
-                    <TextView
-                        android:id="@+id/getCurrentLocationText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Get Current location"
-                        android:textColor="@color/black"
-                        android:textSize="24dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/orText" />
-
-                    <ImageView
-                        android:id="@+id/addCurrentLocation"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_add_location"
-                        android:layout_marginLeft="8dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/getCurrentLocationText" />
-                </LinearLayout>
+                    app:layout_constraintTop_toBottomOf="@+id/orText" />
 
 
 
