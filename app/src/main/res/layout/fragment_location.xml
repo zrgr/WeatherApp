@@ -42,19 +42,19 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <ImageView
-                        android:id="@+id/back_arrow"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginRight="8dp"
-                        android:backgroundTint="#F48E1D"
-                        android:importantForAccessibility="no"
-                        app:layout_constraintBottom_toBottomOf="@+id/location"
-                        app:layout_constraintEnd_toStartOf="@+id/location"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/location"
-                        app:srcCompat="@drawable/ic_arrow_back" />
+<!--                    <ImageView-->
+<!--                        android:id="@+id/back_arrow"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:layout_marginRight="8dp"-->
+<!--                        android:backgroundTint="#F48E1D"-->
+<!--                        android:importantForAccessibility="no"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@+id/location"-->
+<!--                        app:layout_constraintEnd_toStartOf="@+id/location"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="@+id/location"-->
+<!--                        app:srcCompat="@drawable/ic_arrow_back" />-->
 
 
                     <RelativeLayout
